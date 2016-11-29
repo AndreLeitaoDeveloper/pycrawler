@@ -1,25 +1,20 @@
 #!/usr/bin/env python
 #-*- coding: utf-8 -*-
 from bs4 import BeautifulSoup
-from pymongo import MongoClient
-import urllib
+import urllib, sys, os
 
-def connection_db():
-    """
-    This function is responsable for connection to database and define database name and collection name
+sys.path.append(os.path.abspath("utils/validators"))
+from news import NewsValidator
 
-    Args:
+sys.path.append(os.path.abspath("conf"))
+from confbd import Connect
+connectbd = Connect("local", "noticias")
 
-    Returns:
-        client     : Connection to database
-        db         : Database name
-        collection : Collecion name
+data = connectbd.collection.find({"noticias.title": "title"}).count()
 
-    """
-    client = MongoClient('localhost', 27017)
-    db = client.local
-    collection = db.noticias
-    return (client, db, collection)
+print data
+
+
 
 def get_url(url):
     """
@@ -39,38 +34,15 @@ def get_url(url):
     takeaways = soup.findAll('item')
     return takeaways
 
-def verify_news(title):
-    """
-    This function is responsable for verify if the news already exist
-
-    Args:
-        title (str)  : Title the news
-    Returns:
-       bool: The return value. True for success, False otherwise.
-    """
-    data = collection.find({"noticias.title": title}).count()
-
-    if data == 0:
-        return True
-    else:
-        return False
-
-def error_exist(error):
-    """
-    Return error 
-
-    Args:
-        error (str)  : Text of error
-    Returns:
-       str: Return error
-    """
-    print error
-    return
-
-
-
-client, db, collection = connection_db()
 takeaways = get_url("http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml")
+
+
+noticia = {}
+
+validators = NewsValidator()
+
+print validators.attribute_news(noticia)
+
 
 
 for eachtakeaway in takeaways:
