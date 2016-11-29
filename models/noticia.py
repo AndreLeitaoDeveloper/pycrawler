@@ -12,7 +12,7 @@ class Noticia(NewsValidator):
 
     """
 
-´gh    def __init__(self, noticia):
+    def __init__(self, noticia):
         """
         Construtor
         """
