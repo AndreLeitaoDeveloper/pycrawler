@@ -50,22 +50,3 @@ class Noticia(NewsValidator):
                      "creator": creator,
                      "guid": guid}
         return jornal['noticias']
-
-
-    def insert_news(self):
-        """
-        This function is responsable for connection to database and define database name and collection name
-
-        Args:
-            self (obj) : Object class Noticia
-            Noticia (str)  : Object with data for insert at Database
-
-        Returns:
-            bolean  : True inserted at bd
-        """
-        exist = verify_news(self.noticias['title'])
-
-        if exist:
-            result = collection.insert_one(self.noticia)
-        else:
-            error_exist("Noticia já existente")
