@@ -34,3 +34,16 @@ class NewsController(object):
         """
         print error
         return
+
+    @staticmethod
+    def insert_new(noticia):
+        """
+        Return error 
+
+        Args:
+            noticia (array)  : Array with elements the news
+        Returns:
+           str: Return error
+        """
+        connectbd = Connect("local", "noticias")
+        connectbd.collection.insert_one(noticia)
