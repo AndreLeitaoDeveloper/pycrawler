@@ -6,7 +6,7 @@ A ideia Geral é fazer um parse a uma RSS feed, e gravar os elementos como campo
 Pensar nos recursos necessarios, exemplo: pymongo para falar com o mongo, algo que faça parse ao xml (google it:p )
 
 para instalar modulos do python em baixo como exemplo:
->> pip install pymongo
+> pip install pymongo
 
 
 ##1 - fazer um request a http://feeds.feedburner.com/PublicoRSS?format=xml
