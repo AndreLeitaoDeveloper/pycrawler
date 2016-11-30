@@ -1,9 +1,11 @@
+from bs4 import BeautifulSoup
+import urllib
+
 def get_url(url):
     """
     This function is responsable for connection to database and define database name and collection name
 
     Args:
-        self (obj) : Object class Noticia
         Url (str)  : Url of crawler website
 
     Returns:
@@ -16,3 +18,4 @@ def get_url(url):
     soup = BeautifulSoup(item, 'html.parser')
     takeaways = soup.findAll('item')
     return takeaways
+    
